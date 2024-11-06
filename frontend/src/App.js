@@ -1,0 +1,1 @@
+/** Aquí va el Componente principal de la app React */

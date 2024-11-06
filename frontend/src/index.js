@@ -1,0 +1,1 @@
+/** Aquí va el Punto de entrada de React */
