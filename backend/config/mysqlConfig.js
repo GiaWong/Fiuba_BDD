@@ -11,12 +11,4 @@ const connection = mysql.createConnection({
   port: 3306
 });
 
-connection.connect((err) => {
-  if (err) {
-    console.error('Error conectando a MySQL: ', err);
-    return;
-  }
-  console.log('Conexión exitosa a MySQL');
-});
-
 module.exports = connection;

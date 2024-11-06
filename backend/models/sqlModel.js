@@ -1,11 +1,11 @@
 /** Aquí va el Modelo MySQL para interactuar con la base relacional */
 
-const connection = require('backend/config/mysqlConfig.js');  // Ajustar la ruta si es necesario
+const connection = require('backend/config/mysqlConfig.js'); 
 
 // Conectar a la base de datos
 connection.connect((err) => {
     if (err) {
-      console.error('Error conectando a MySQL: ', err.code);  // imprimir el código de error
+      console.error('Error conectando a MySQL: ', err.code); 
       console.error('Mensaje del error: ', err.message);
       return;
     }
