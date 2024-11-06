@@ -1,0 +1,1 @@
+/** Aquí va la Tabla para mostrar los datos de ambas bases */
