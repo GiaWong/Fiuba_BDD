@@ -1,8 +1,22 @@
 /**Aquí va la configuración para conectarse a MySQL */
 
-module.exports = {
-    host: 'localhost',
-    user: 'root',
-    password: 'tu_password',
-    database: 'nombre_de_la_base'
-  };
+const mysql = require('mysql');
+
+/** Usaremos el Freesqldatabase.com Este servicio ofrece MySQL gratuito en la nube */
+const connection = mysql.createConnection({
+  host: 'sql10.freesqldatabase.com',
+  user: 'sql10743024',
+  password: 'gCPMhUzaT3',
+  database: 'sql10743024',
+  port: 3306
+});
+
+connection.connect((err) => {
+  if (err) {
+    console.error('Error conectando a MySQL: ', err);
+    return;
+  }
+  console.log('Conexión exitosa a MySQL');
+});
+
+module.exports = connection;
