@@ -1,1 +1,0 @@
-/** Aquí va las Funciones para consumir la API del backend */

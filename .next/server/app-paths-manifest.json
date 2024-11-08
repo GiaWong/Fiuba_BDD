@@ -1,5 +1,4 @@
 {
-  "/page": "app/page.js",
-  "/home/mysql/page": "app/home/mysql/page.js",
-  "/home/firebase/page": "app/home/firebase/page.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js"
 }
