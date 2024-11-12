@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={poppins.className}>
         <Providers> {/* Envolviendo toda la aplicación dentro del Providers */}
-          <Flex w="100vw" h="100vh" direction="column" bg="#232a30">
+          <Flex w="100vw" h="100vh" direction="column" bg="gray.50">
             <Flex
               w="100%"
               h="100%"
