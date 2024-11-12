@@ -16,7 +16,8 @@ export default function MySql() {
 
   useEffect(() => {
     const loadData = async () => {
-      const dataList = await fetchData(); // Obtener datos desde MySQL
+      const response = await fetch("/api/vuelos");
+      const dataList = await response.json();
       setData(dataList);
     };
     loadData();
@@ -32,13 +33,36 @@ export default function MySql() {
   };
 
   const handleAddClick = async () => {
-    await handleAdd(origen, destino, fecha, hora, asientosDisponibles); // Agregar nuevo registro a MySQL
+    const response = await fetch("/api/vuelos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        origen,
+        destino,
+        fecha,
+        hora,
+        asientosDisponibles,
+      }),
+    });
+    await response.json();
     clearForm();
     loadData();
   };
 
+
   const handleDeleteClick = async (index) => {
-    await handleDelete(data[index].id); // Eliminar registro de MySQL
+    const response = await fetch("/api/vuelos", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: data[index].id,
+      }),
+    });
+    await response.json();
     loadData();
   };
 
@@ -54,7 +78,21 @@ export default function MySql() {
 
   const handleUpdateClick = async () => {
     if (editIndex !== null) {
-      await handleUpdate(data[editIndex].id, origen, destino, fecha, hora, asientosDisponibles); // Actualizar registro en MySQL
+      const response = await fetch("/api/vuelos", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: data[editIndex].id,
+          origen,
+          destino,
+          fecha,
+          hora,
+          asientosDisponibles,
+        }),
+      });
+      await response.json();
       clearForm();
       loadData();
     }

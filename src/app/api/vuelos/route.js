@@ -1,4 +1,7 @@
-// src/app/api/vuelos/route.js
+
+/** El frontend (React) hará solicitudes 
+ * a las rutas de la API en src/app/api/vuelos/route.js 
+ * para interactuar con MySQL. */
 
 import { fetchData, handleAdd, handleDelete, handleUpdate } from "../../../src/operaciones_mysql/mysqlOperations"; 
 
