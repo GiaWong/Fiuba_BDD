@@ -5,7 +5,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Heading, FormControl, FormLabel, Input, Button, VStack, HStack, Table, Thead, Tbody, Tr, Th, Td, IconButton } from "@chakra-ui/react";
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
-import { fetchData, handleAdd, handleDelete, handleUpdate } from './firestoreOperations'; // Asegúrate de usar ../ para subir un nivel de carpeta
+import { fetchData, handleAdd, handleDelete, handleUpdate } from '../operaciones_fireStone/firestoreOperations'; // Asegúrate de usar ../ para subir un nivel de carpeta
 
 export default function Page() {
   const [data, setData] = useState([]);
