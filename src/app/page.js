@@ -1,140 +1,174 @@
+// src/app/Page.js
+
 'use client';
 
 import React, { useState, useEffect } from "react";
 import { Box, Heading, FormControl, FormLabel, Input, Button, VStack, HStack, Table, Thead, Tbody, Tr, Th, Td, IconButton } from "@chakra-ui/react";
-import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from "firebase/firestore";
-import { initializeApp } from "firebase/app";
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
-
-// Tu configuración de Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyBhYYuitorjDvnZXlfyVj_I2JbMVe6d5vE",
-  authDomain: "tp-bd-merlino.firebaseapp.com",
-  projectId: "tp-bd-merlino",
-  storageBucket: "tp-bd-merlino.firebasestorage.app",
-  messagingSenderId: "116391928915",
-  appId: "1:116391928915:web:409d0822afcc09e8e692a6"
-};
-
-// Inicializa Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app); // Obtener la instancia de Firestore
+import { fetchData, handleAdd, handleDelete, handleUpdate } from './firestoreOperations'; // Asegúrate de usar ../ para subir un nivel de carpeta
 
 export default function Page() {
   const [data, setData] = useState([]);
-  const [inputValue, setInputValue] = useState("");
+  const [origen, setOrigen] = useState("");
+  const [destino, setDestino] = useState("");
+  const [fecha, setFecha] = useState("");
+  const [hora, setHora] = useState("");
+  const [asientosDisponibles, setAsientosDisponibles] = useState("");
   const [editIndex, setEditIndex] = useState(null);
 
-  // Función para obtener los datos de Firestore
-  const fetchData = async () => {
-    const querySnapshot = await getDocs(collection(db, "datos"));
-    const dataList = [];
-    querySnapshot.forEach((doc) => {
-      dataList.push({ id: doc.id, ...doc.data() });
-    });
+  // Función para cargar los datos desde Firestore
+  const loadData = async () => {
+    const dataList = await fetchData();
     setData(dataList);
   };
 
   useEffect(() => {
-    fetchData();
+    loadData();
   }, []);
 
-  const handleAdd = async () => {
-    if (inputValue.trim()) {
-      try {
-        await addDoc(collection(db, "datos"), {
-          value: inputValue,
-        });
-        setInputValue(""); // Limpiar el campo de entrada
-        fetchData(); // Recargar los datos
-      } catch (e) {
-        console.error("Error agregando documento: ", e);
-      }
-    }
+  const handleAddClick = () => {
+    handleAdd(origen, destino, fecha, hora, asientosDisponibles);
+    setOrigen("");
+    setDestino("");
+    setFecha("");
+    setHora("");
+    setAsientosDisponibles("");
+    loadData();
+  };
+
+  const handleDeleteClick = (index) => {
+    handleDelete(data[index].id);
+    loadData();
   };
 
   const handleEdit = (index) => {
-    setInputValue(data[index].value);
+    const item = data[index];
+    setOrigen(item.origen);
+    setDestino(item.destino);
+    setFecha(item.fecha);
+    setHora(item.hora);
+    setAsientosDisponibles(item.asientosDisponibles);
     setEditIndex(index);
   };
 
-  const handleUpdate = async () => {
-    if (editIndex !== null && inputValue.trim()) {
-      const docRef = doc(db, "datos", data[editIndex].id);
-      try {
-        await updateDoc(docRef, {
-          value: inputValue,
-        });
-        setInputValue(""); // Limpiar el campo de entrada
-        setEditIndex(null); // Resetear el estado de edición
-        fetchData(); // Recargar los datos
-      } catch (e) {
-        console.error("Error actualizando documento: ", e);
-      }
-    }
-  };
-
-  const handleDelete = async (index) => {
-    const docRef = doc(db, "datos", data[index].id);
-    try {
-      await deleteDoc(docRef);
-      fetchData(); // Recargar los datos
-    } catch (e) {
-      console.error("Error eliminando documento: ", e);
+  const handleUpdateClick = () => {
+    if (editIndex !== null) {
+      handleUpdate(data[editIndex].id, origen, destino, fecha, hora, asientosDisponibles);
+      loadData();
+      setEditIndex(null);
+      setOrigen("");
+      setDestino("");
+      setFecha("");
+      setHora("");
+      setAsientosDisponibles("");
     }
   };
 
   return (
     <Box p={8} maxWidth="800px" mx="auto" bg="gray.50" borderRadius="lg" boxShadow="md">
       <Heading mb={6} textAlign="center" color="teal.500">
-        Gestión de Datos
+        Gestión de Vuelos
       </Heading>
 
-      <FormControl mb={4}>
-        <FormLabel color="teal.600">Ingrese un dato</FormLabel>
-        <Input
-          placeholder="Nuevo dato"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          variant="filled"
-          focusBorderColor="teal.400"
-        />
-      </FormControl>
+      {/* Formulario para ingresar un vuelo */}
+      <VStack spacing={4} mb={6}>
+        <FormControl>
+          <FormLabel color="teal.600">Origen</FormLabel>
+          <Input
+            placeholder="Origen"
+            value={origen}
+            onChange={(e) => setOrigen(e.target.value)}
+            variant="filled"
+            focusBorderColor="teal.400"
+          />
+        </FormControl>
 
-      <Button 
-        colorScheme="teal" 
-        width="full" 
-        mb={6} 
-        onClick={editIndex !== null ? handleUpdate : handleAdd}
-        isLoading={false} // Puedes agregar isLoading si tienes alguna operación asíncrona
-      >
-        {editIndex !== null ? "Modificar Dato" : "Agregar Dato"}
-      </Button>
+        <FormControl>
+          <FormLabel color="teal.600">Destino</FormLabel>
+          <Input
+            placeholder="Destino"
+            value={destino}
+            onChange={(e) => setDestino(e.target.value)}
+            variant="filled"
+            focusBorderColor="teal.400"
+          />
+        </FormControl>
 
+        <FormControl>
+          <FormLabel color="teal.600">Fecha</FormLabel>
+          <Input
+            type="date"
+            value={fecha}
+            onChange={(e) => setFecha(e.target.value)}
+            variant="filled"
+            focusBorderColor="teal.400"
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel color="teal.600">Hora</FormLabel>
+          <Input
+            type="time"
+            value={hora}
+            onChange={(e) => setHora(e.target.value)}
+            variant="filled"
+            focusBorderColor="teal.400"
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel color="teal.600">Asientos Disponibles</FormLabel>
+          <Input
+            type="number"
+            value={asientosDisponibles}
+            onChange={(e) => setAsientosDisponibles(e.target.value)}
+            variant="filled"
+            focusBorderColor="teal.400"
+          />
+        </FormControl>
+
+        {editIndex !== null ? (
+          <Button colorScheme="teal" width="full" onClick={handleUpdateClick}>
+            Actualizar Vuelo
+          </Button>
+        ) : (
+          <Button colorScheme="teal" width="full" onClick={handleAddClick}>
+            Agregar Vuelo
+          </Button>
+        )}
+      </VStack>
+
+      {/* Tabla para mostrar los vuelos */}
       <Table variant="simple" size="md">
         <Thead>
           <Tr>
-            <Th color="teal.600">Dato</Th>
+            <Th color="teal.600">Origen</Th>
+            <Th color="teal.600">Destino</Th>
+            <Th color="teal.600">Fecha</Th>
+            <Th color="teal.600">Hora</Th>
+            <Th color="teal.600">Asientos Disponibles</Th>
             <Th color="teal.600" textAlign="center">Acciones</Th>
           </Tr>
         </Thead>
         <Tbody>
           {data.map((item, index) => (
             <Tr key={item.id}>
-              <Td>{item.value}</Td>
+              <Td>{item.origen}</Td>
+              <Td>{item.destino}</Td>
+              <Td>{item.fecha}</Td>
+              <Td>{item.hora}</Td>
+              <Td>{item.asientosDisponibles}</Td>
               <Td textAlign="center">
-                <HStack justify="center" spacing={4}>
+                <HStack justify="center">
                   <IconButton
-                    colorScheme="yellow"
-                    aria-label="Editar"
                     icon={<EditIcon />}
+                    colorScheme="teal"
                     onClick={() => handleEdit(index)}
                   />
                   <IconButton
-                    colorScheme="red"
-                    aria-label="Eliminar"
                     icon={<DeleteIcon />}
-                    onClick={() => handleDelete(index)}
+                    colorScheme="red"
+                    onClick={() => handleDeleteClick(index)}
                   />
                 </HStack>
               </Td>
