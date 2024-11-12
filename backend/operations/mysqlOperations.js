@@ -1,4 +1,4 @@
-// src/mysqlOperations.js
+// Aquí va la logica CRUD
 
 const { fetchData, addData, deleteData, updateData } = require('../models/sqlModel');
 
