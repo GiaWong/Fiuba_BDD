@@ -3,7 +3,6 @@
 import { Box, Heading, FormControl, FormLabel, Input, Button, VStack, HStack, Table, Thead, Tbody, Tr, Th, Td, IconButton } from "@chakra-ui/react";
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import React, { useState, useEffect } from "react";
-import { fetchData, handleAdd, handleDelete, handleUpdate } from 'src/operaciones_mysql/mysqlOperations'; 
 
 export default function MySql() {
   const [data, setData] = useState([]);

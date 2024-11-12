@@ -3,7 +3,7 @@
  * a las rutas de la API en src/app/api/vuelos/route.js 
  * para interactuar con MySQL. */
 
-import { fetchData, handleAdd, handleDelete, handleUpdate } from "../../../src/operaciones_mysql/mysqlOperations"; 
+import { fetchData, handleAdd, handleDelete, handleUpdate } from "../../../../backend/operations/mysqlOperations";
 
 export async function GET(req) {
   try {
