@@ -1,15 +1,15 @@
 /**Aquí va la configuración para conectarse a MySQL */
-
 // backend/config/mysqlConfig.js
 
+require('dotenv').config();
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-  host: 'sql10.freesqldatabase.com',
-  user: 'sql10743024',
-  password: 'gCPMhUzaT3',
-  database: 'sql10743024',
-  port: 3306
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
+  port: process.env.MYSQL_PORT
 });
 
 // Conectar a la base de datos
@@ -18,7 +18,7 @@ function connectWithRetry() {
     if (err) {
       console.error('Error conectando a MySQL:', err.message);
       console.log('Reintentando conexión en 5 segundos...');
-      setTimeout(connectWithRetry, 5000); // Reintentar en 5 segundos
+      setTimeout(connectWithRetry, 5000);
     } else {
       console.log('Conexión exitosa a MySQL');
     }
@@ -27,16 +27,14 @@ function connectWithRetry() {
 
 connectWithRetry();
 
-// Manejar errores en la conexión en ejecución
 connection.on('error', (err) => {
   console.error('Error en la conexión MySQL:', err.message);
   if (err.code === 'PROTOCOL_CONNECTION_LOST') {
     console.log('Reconectando a MySQL...');
-    connectWithRetry(); // Intentar reconectar si la conexión se pierde
+    connectWithRetry();
   } else {
     throw err;
   }
 });
 
 module.exports = connection;
-
