@@ -17,6 +17,7 @@ export default function MySql() {
     const loadData = async () => {
       const response = await fetch("/api/vuelos");
       const dataList = await response.json();
+      console.log("Datos recibidos:", dataList);
       setData(dataList);
     };
     loadData();

@@ -3,7 +3,7 @@
 const { fetchData, addData, deleteData, updateData } = require('../models/sqlModel');
 
 // Función para obtener todos los datos de la tabla 'vuelos'
-export const fetchDataFromMySQL = async () => {
+const fetchDataFromMySQL = async () => {
   return new Promise((resolve, reject) => {
     fetchData((error, results) => {
       if (error) {
@@ -17,7 +17,7 @@ export const fetchDataFromMySQL = async () => {
 };
 
 // Función para añadir un vuelo
-export const handleAddToMySQL = async (origen, destino, fecha, hora, asientosDisponibles) => {
+const handleAddToMySQL = async (origen, destino, fecha, hora, asientosDisponibles) => {
   return new Promise((resolve, reject) => {
     if (origen.trim() && destino.trim() && fecha.trim() && hora.trim() && asientosDisponibles.trim()) {
       addData(origen, destino, fecha, hora, parseInt(asientosDisponibles), (error) => {
@@ -35,7 +35,7 @@ export const handleAddToMySQL = async (origen, destino, fecha, hora, asientosDis
 };
 
 // Función para borrar un vuelo
-export const handleDeleteFromMySQL = async (id) => {
+const handleDeleteFromMySQL = async (id) => {
   return new Promise((resolve, reject) => {
     deleteData(id, (error) => {
       if (error) {
@@ -49,7 +49,7 @@ export const handleDeleteFromMySQL = async (id) => {
 };
 
 // Función para actualizar un vuelo
-export const handleUpdateInMySQL = async (id, origen, destino, fecha, hora, asientosDisponibles) => {
+const handleUpdateInMySQL = async (id, origen, destino, fecha, hora, asientosDisponibles) => {
   return new Promise((resolve, reject) => {
     if (origen.trim() && destino.trim() && fecha.trim() && hora.trim() && asientosDisponibles.trim()) {
       updateData(id, origen, destino, fecha, hora, parseInt(asientosDisponibles), (error) => {
@@ -64,4 +64,11 @@ export const handleUpdateInMySQL = async (id, origen, destino, fecha, hora, asie
       reject("Todos los campos son requeridos.");
     }
   });
+};
+
+module.exports = {
+  fetchDataFromMySQL,
+  handleAddToMySQL,
+  handleDeleteFromMySQL,
+  handleUpdateInMySQL
 };
