@@ -4,6 +4,7 @@ import { Box, Heading, FormControl, FormLabel, Input, Button, VStack, HStack, Ta
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import React, { useState, useEffect } from "react";
 
+
 export default function MySql() {
   const [data, setData] = useState([]);
   const [origen, setOrigen] = useState("");
@@ -13,13 +14,15 @@ export default function MySql() {
   const [asientosDisponibles, setAsientosDisponibles] = useState("");
   const [editIndex, setEditIndex] = useState(null);
 
+  const loadData = async () => {
+    const response = await fetch("/api/vuelos");
+    const dataList = await response.json();
+    console.log("Datos recibidos:", dataList);
+    //setData(dataList);
+    setData(Array.isArray(dataList) ? dataList : []);
+
+  };
   useEffect(() => {
-    const loadData = async () => {
-      const response = await fetch("/api/vuelos");
-      const dataList = await response.json();
-      console.log("Datos recibidos:", dataList);
-      setData(dataList);
-    };
     loadData();
   }, []);
 
