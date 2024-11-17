@@ -5,6 +5,7 @@
 
 const { fetchData, handleAdd, handleDelete, handleUpdate } = require("../../../../backend/operations/mysqlOperations");
 
+
 export async function GET(req) {
   try {
     const data = await fetchData();
