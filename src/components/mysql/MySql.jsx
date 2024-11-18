@@ -38,7 +38,7 @@ export default function MySql() {
   //funcion responsable de agregar vuelos al backend
   const handleAddClick = async () => {
 
-    // Muestra los datos que serán enviados al backend
+    // Muestra los datos que serán enviados al backend poner F12 en el navegador
     console.log("Datos enviados al backend:", { 
       origen, 
       destino, 
@@ -47,7 +47,7 @@ export default function MySql() {
       asientosDisponibles 
     });
 
-    const response = await fetch("/api/vuelos", {
+    const response = await fetch("/api/vuelos", { //sale error 500 en console
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,9 +60,18 @@ export default function MySql() {
         asientosDisponibles,
       }),
     });
-    await response.json();
+
+
+  const data = await response.json(); // Obtener la respuesta ----> sale error 500 en console
+  if (response.ok) {
+    console.log('Vuelo agregado exitosamente', data);
     clearForm();
     loadData();
+  } else {
+    
+    console.error('Error al agregar vuelo:', data);
+  }
+ 
   };
 
  //Esta función elimina un vuelo del backend

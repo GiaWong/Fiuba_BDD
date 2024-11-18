@@ -18,6 +18,9 @@ const fetchData = (callback) => {
 
 // Función para agregar un nuevo vuelo a la tabla 'vuelos'
 const addData = (origen, destino, fecha, hora, asientosDisponibles, callback) => {
+  
+  console.log('Datos recibidos:', { origen, destino, fecha, hora, asientosDisponibles }); 
+  
   const query = 'INSERT INTO vuelos (origen, destino, fecha, hora, asientos_disponibles) VALUES (?, ?, ?, ?, ?)';
   connection.query(query, [origen, destino, fecha, hora, asientosDisponibles], (error, results) => {
     if (error) {

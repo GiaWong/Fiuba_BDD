@@ -1,12 +1,7 @@
 
-/** El frontend (React) hará solicitudes 
- * a las rutas de la API en src/app/api/vuelos/route.js 
- * para interactuar con MySQL. */
-
 const { fetchData, handleAdd, handleDelete, handleUpdate } = require("../../../../backend/operations/mysqlOperations");
 
-
-export async function GET(req) {
+export async function GET(req) { // sale error 500 , why??
   try {
     const data = await fetchData();
     return new Response(JSON.stringify(data), { status: 200 });
