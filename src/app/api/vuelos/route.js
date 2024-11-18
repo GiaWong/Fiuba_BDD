@@ -1,41 +1,44 @@
+const { fetchDataFromMySQL, handleAddToMySQL, handleDeleteFromMySQL, handleUpdateInMySQL } = require('../../../../backend/operations/mysqlOperations');
 
-const { fetchData, handleAdd, handleDelete, handleUpdate } = require("../../../../backend/operations/mysqlOperations");
-
-export async function GET(req) { // sale error 500 , why??
+export async function GET(req) {
   try {
-    const data = await fetchData();
+    const data = await fetchDataFromMySQL();
     return new Response(JSON.stringify(data), { status: 200 });
   } catch (error) {
-    return new Response(JSON.stringify({ message: "Error fetching data", error }), { status: 500 });
+    console.error('Error fetching data:', error);
+    return new Response(JSON.stringify({ message: 'Error fetching data', error: error.message || error }), { status: 500 });
   }
 }
 
 export async function POST(req) {
-  const { origen, destino, fecha, hora, asientosDisponibles } = await req.json();
   try {
-    await handleAdd(origen, destino, fecha, hora, asientosDisponibles);
-    return new Response(JSON.stringify({ message: "Vuelo agregado" }), { status: 200 });
+    const { origen, destino, fecha, hora, asientosDisponibles } = await req.json();
+    await handleAddToMySQL(origen, destino, fecha, hora, asientosDisponibles);
+    return new Response(JSON.stringify({ message: 'Vuelo agregado' }), { status: 200 });
   } catch (error) {
-    return new Response(JSON.stringify({ message: "Error adding data", error }), { status: 500 });
+    console.error('Error adding data:', error);
+    return new Response(JSON.stringify({ message: 'Error adding data', error: error.message || error }), { status: 500 });
   }
 }
 
 export async function DELETE(req) {
-  const { id } = await req.json();
   try {
-    await handleDelete(id);
-    return new Response(JSON.stringify({ message: "Vuelo eliminado" }), { status: 200 });
+    const { id } = await req.json();
+    await handleDeleteFromMySQL(id);
+    return new Response(JSON.stringify({ message: 'Vuelo eliminado' }), { status: 200 });
   } catch (error) {
-    return new Response(JSON.stringify({ message: "Error deleting data", error }), { status: 500 });
+    console.error('Error deleting data:', error);
+    return new Response(JSON.stringify({ message: 'Error deleting data', error: error.message || error }), { status: 500 });
   }
 }
 
 export async function PUT(req) {
-  const { id, origen, destino, fecha, hora, asientosDisponibles } = await req.json();
   try {
-    await handleUpdate(id, origen, destino, fecha, hora, asientosDisponibles);
-    return new Response(JSON.stringify({ message: "Vuelo actualizado" }), { status: 200 });
+    const { id, origen, destino, fecha, hora, asientosDisponibles } = await req.json();
+    await handleUpdateInMySQL(id, origen, destino, fecha, hora, asientosDisponibles);
+    return new Response(JSON.stringify({ message: 'Vuelo actualizado' }), { status: 200 });
   } catch (error) {
-    return new Response(JSON.stringify({ message: "Error updating data", error }), { status: 500 });
+    console.error('Error updating data:', error);
+    return new Response(JSON.stringify({ message: 'Error updating data', error: error.message || error }), { status: 500 });
   }
 }

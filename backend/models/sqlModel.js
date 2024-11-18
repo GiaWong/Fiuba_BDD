@@ -21,7 +21,7 @@ const addData = (origen, destino, fecha, hora, asientosDisponibles, callback) =>
   
   console.log('Datos recibidos:', { origen, destino, fecha, hora, asientosDisponibles }); 
   
-  const query = 'INSERT INTO vuelos (origen, destino, fecha, hora, asientos_disponibles) VALUES (?, ?, ?, ?, ?)';
+  const query = 'INSERT INTO vuelos (origen, destino, fecha, hora, asientosDisponibles) VALUES (?, ?, ?, ?, ?)';
   connection.query(query, [origen, destino, fecha, hora, asientosDisponibles], (error, results) => {
     if (error) {
       console.error("Error agregando vuelo:", error);
@@ -45,7 +45,7 @@ const deleteData = (id, callback) => {
 
 // Función para actualizar los datos de un vuelo en la tabla 'vuelos' por ID
 const updateData = (id, origen, destino, fecha, hora, asientosDisponibles, callback) => {
-  const query = 'UPDATE vuelos SET origen = ?, destino = ?, fecha = ?, hora = ?, asientos_disponibles = ? WHERE id = ?';
+  const query = 'UPDATE vuelos SET origen = ?, destino = ?, fecha = ?, hora = ?, asientosDisponibles = ? WHERE id = ?';
   connection.query(query, [origen, destino, fecha, hora, asientosDisponibles, id], (error, results) => {
     if (error) {
       console.error("Error actualizando vuelo:", error);
