@@ -16,10 +16,23 @@ const fetchDataFromMySQL = async () => {
   });
 };
 
+const isValidDate = (date) => !isNaN(Date.parse(date));
+const isValidTime = (time) => /^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/.test(time);
+
 // Función para añadir un vuelo
 const handleAddToMySQL = async (origen, destino, fecha, hora, asientosDisponibles) => {
   return new Promise((resolve, reject) => {
-    if (origen.trim() && destino.trim() && fecha.trim() && hora.trim() && asientosDisponibles.trim()) {
+    
+    if (
+
+      origen.trim() &&
+      destino.trim() &&
+      isValidDate(fecha) &&
+      isValidTime(hora) &&
+      Number.isInteger(parseInt(asientosDisponibles)) &&
+      parseInt(asientosDisponibles) >= 0
+
+    ) {
       addData(origen, destino, fecha, hora, parseInt(asientosDisponibles), (error) => {
         if (error) {
           console.error("Error agregando vuelo:", error);

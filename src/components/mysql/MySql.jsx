@@ -14,11 +14,11 @@ export default function MySql() {
   const [asientosDisponibles, setAsientosDisponibles] = useState("");
   const [editIndex, setEditIndex] = useState(null);
 
+  //funcion que carga los datos desde el backend para mostrarlos en la tabla "vuelos"
   const loadData = async () => {
     const response = await fetch("/api/vuelos");
     const dataList = await response.json();
     console.log("Datos recibidos:", dataList);
-    //setData(dataList);
     setData(Array.isArray(dataList) ? dataList : []);
 
   };
@@ -35,7 +35,18 @@ export default function MySql() {
     setEditIndex(null);
   };
 
+  //funcion responsable de agregar vuelos al backend
   const handleAddClick = async () => {
+
+    // Muestra los datos que serán enviados al backend
+    console.log("Datos enviados al backend:", { 
+      origen, 
+      destino, 
+      fecha, 
+      hora, 
+      asientosDisponibles 
+    });
+
     const response = await fetch("/api/vuelos", {
       method: "POST",
       headers: {
@@ -54,7 +65,7 @@ export default function MySql() {
     loadData();
   };
 
-
+ //Esta función elimina un vuelo del backend
   const handleDeleteClick = async (index) => {
     const response = await fetch("/api/vuelos", {
       method: "DELETE",
@@ -79,6 +90,7 @@ export default function MySql() {
     setEditIndex(index);
   };
 
+  // Si se está editando datos, esta función envía las actualizaciones al backend
   const handleUpdateClick = async () => {
     if (editIndex !== null) {
       const response = await fetch("/api/vuelos", {
