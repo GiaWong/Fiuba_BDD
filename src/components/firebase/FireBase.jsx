@@ -135,6 +135,7 @@ export default function Firebasee() {
       </VStack>
 
       {/* Tabla para mostrar los vuelos */}
+      <Box overflowX="auto"> 
       <Table variant="simple" size="md">
         <Thead>
           <Tr>
@@ -172,6 +173,7 @@ export default function Firebasee() {
           ))}
         </Tbody>
       </Table>
+    </Box>
     </Box>
   );
 }
