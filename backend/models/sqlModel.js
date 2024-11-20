@@ -1,7 +1,5 @@
 /** Aquí va el Modelo MySQL para interactuar con la base relacional */
 
-// backend/models/sqlModel.js
-
 const connection = require('../config/mysqlConfig.js');
 
 // Función para obtener todos los datos de la tabla 'vuelos'
@@ -16,11 +14,9 @@ const fetchData = (callback) => {
   });
 };
 
+
 // Función para agregar un nuevo vuelo a la tabla 'vuelos'
 const addData = (origen, destino, fecha, hora, asientosDisponibles, callback) => {
-  
-  console.log('Datos recibidos:', { origen, destino, fecha, hora, asientosDisponibles }); 
-  
   const query = 'INSERT INTO vuelos (origen, destino, fecha, hora, asientosDisponibles) VALUES (?, ?, ?, ?, ?)';
   connection.query(query, [origen, destino, fecha, hora, asientosDisponibles], (error, results) => {
     if (error) {
@@ -30,6 +26,7 @@ const addData = (origen, destino, fecha, hora, asientosDisponibles, callback) =>
     callback(null, results);
   });
 };
+
 
 // Función para eliminar un vuelo de la tabla 'vuelos' por ID
 const deleteData = (id, callback) => {
@@ -43,6 +40,7 @@ const deleteData = (id, callback) => {
   });
 };
 
+
 // Función para actualizar los datos de un vuelo en la tabla 'vuelos' por ID
 const updateData = (id, origen, destino, fecha, hora, asientosDisponibles, callback) => {
   const query = 'UPDATE vuelos SET origen = ?, destino = ?, fecha = ?, hora = ?, asientosDisponibles = ? WHERE id = ?';
@@ -54,6 +52,7 @@ const updateData = (id, origen, destino, fecha, hora, asientosDisponibles, callb
     callback(null, results);
   });
 };
+
 
 // Exportar las funciones para que puedan ser usadas en otros módulos
 module.exports = {

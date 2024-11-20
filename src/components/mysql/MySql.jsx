@@ -47,7 +47,7 @@ export default function MySql() {
       asientosDisponibles 
     });
 
-    const response = await fetch("/api/vuelos", { //sale error 500 en console
+    const response = await fetch("/api/vuelos", { 
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -62,7 +62,7 @@ export default function MySql() {
     });
 
 
-  const data = await response.json(); // Obtener la respuesta ----> sale error 500 en console
+  const data = await response.json(); 
   if (response.ok) {
     console.log('Vuelo agregado exitosamente', data);
     clearForm();
@@ -89,11 +89,14 @@ export default function MySql() {
     loadData();
   };
 
+  const formatDate = (isoDate) => {
+    return new Date(isoDate).toISOString().split('T')[0];
+  };
   const handleEdit = (index) => {
     const item = data[index];
     setOrigen(item.origen);
     setDestino(item.destino);
-    setFecha(item.fecha);
+    setFecha(formatDate(item.fecha));
     setHora(item.hora);
     setAsientosDisponibles(item.asientosDisponibles);
     setEditIndex(index);

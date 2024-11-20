@@ -18,7 +18,9 @@ const fetchDataFromMySQL = async () => {
 
 const isValidDate = (date) => !isNaN(Date.parse(date));
 const isValidTime = (time) => /^([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$/.test(time);
-
+const formatDate = (isoDate) => {
+  return new Date(isoDate).toISOString().split('T')[0];
+};
 // Función para añadir un vuelo
 const handleAddToMySQL = async (origen, destino, fecha, hora, asientosDisponibles) => {
   return new Promise((resolve, reject) => {
@@ -32,7 +34,8 @@ const handleAddToMySQL = async (origen, destino, fecha, hora, asientosDisponible
       parseInt(asientosDisponibles) >= 0
 
     ) {
-      addData(origen, destino, fecha, hora, parseInt(asientosDisponibles), (error) => {
+      
+      addData(origen, destino, formatDate(fecha), hora, parseInt(asientosDisponibles), (error) => {
         if (error) {
           console.error("Error agregando vuelo:", error);
           reject(error);
@@ -63,8 +66,16 @@ const handleDeleteFromMySQL = async (id) => {
 // Función para actualizar un vuelo
 const handleUpdateInMySQL = async (id, origen, destino, fecha, hora, asientosDisponibles) => {
   return new Promise((resolve, reject) => {
-    if (origen.trim() && destino.trim() && fecha.trim() && hora.trim() && asientosDisponibles.trim()) {
-      updateData(id, origen, destino, fecha, hora, parseInt(asientosDisponibles), (error) => {
+    if (
+      origen.trim() &&
+      destino.trim() &&
+      isValidDate(fecha) &&
+      isValidTime(hora) &&
+      Number.isInteger(parseInt(asientosDisponibles)) &&
+      parseInt(asientosDisponibles) >= 0
+    ) {
+  
+      updateData(id, origen, destino, formatDate(fecha), hora, parseInt(asientosDisponibles), (error) => {
         if (error) {
           console.error("Error actualizando vuelo:", error);
           reject(error);
