@@ -1,4 +1,4 @@
-// File: /home/chavela/Documentos/Repositorios/Fiuba_BDD/src/app/layout.js
+// File: /home/franco/fiuba/BDD/Fiuba_BDD/src/app/layout.js
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

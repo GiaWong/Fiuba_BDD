@@ -17,12 +17,11 @@ const fetchDataFromMySQL = async () => {
 };
 
 const isValidDate = (date) => !isNaN(Date.parse(date));
-const isValidTime = (time) => /^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/.test(time);
+const isValidTime = (time) => /^([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$/.test(time);
 
 // Función para añadir un vuelo
 const handleAddToMySQL = async (origen, destino, fecha, hora, asientosDisponibles) => {
   return new Promise((resolve, reject) => {
-    
     if (
 
       origen.trim() &&

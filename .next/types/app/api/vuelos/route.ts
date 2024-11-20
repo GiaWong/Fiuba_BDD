@@ -1,4 +1,4 @@
-// File: /home/chavela/Documentos/Repositorios/Fiuba_BDD/src/app/api/vuelos/route.js
+// File: /home/franco/fiuba/BDD/Fiuba_BDD/src/app/api/vuelos/route.js
 import * as entry from '../../../../../src/app/api/vuelos/route.js'
 import type { NextRequest } from 'next/server.js'
 
