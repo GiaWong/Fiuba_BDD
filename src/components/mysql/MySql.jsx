@@ -200,6 +200,7 @@ export default function MySql() {
       </VStack>
 
       {/* Tabla para mostrar los vuelos */}
+      <Box overflowX="auto"> 
       <Table variant="simple" size="md">
         <Thead>
           <Tr>
@@ -237,6 +238,7 @@ export default function MySql() {
           ))}
         </Tbody>
       </Table>
+    </Box>
     </Box>
   );
 }
