@@ -14,11 +14,13 @@ export default function Firebasee() {
   const [asientosDisponibles, setAsientosDisponibles] = useState("");
   const [editIndex, setEditIndex] = useState(null);
 
+
+  const loadData = async () => {
+    const dataList = await fetchData();
+    setData(dataList);
+  };
+
   useEffect(() => {
-    const loadData = async () => {
-      const dataList = await fetchData();
-      setData(dataList);
-    };
     loadData();
   }, []);
 
