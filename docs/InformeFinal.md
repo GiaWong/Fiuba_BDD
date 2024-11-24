@@ -60,7 +60,8 @@ La aplicación muestra estas diferencias en tiempo real, permitiendo realizar la
 
 ### **Retos y Aprendizajes**
 
-Entre las dificultades enfrentadas, destacamos la integración inicial entre el frontend y el backend. Además, trabajar con un servidor remoto de MySQL implicó ajustar las consultas para optimizar el uso del espacio limitado. Por otro lado, Firebase nos desafió a mantener la estructura de los datos clara y sin redundancias, aprovechando su flexibilidad sin caer en desorden.
+Entre las dificultades enfrentadas, destacamos la integración inicial entre el frontend y el backend. Además, trabajar con un servidor remoto de MySQL implicó ajustar las consultas para optimizar el uso del espacio limitado. Un desafío importante que se presentó en MySQL es lo vulnerable que está el backend   ante un ataque de seguridad, ya que los credenciales al servidor estan expuestas, tuvimos que usar un archivo .env para almacenar variables de entorno en un formato de texto plano.
+Con la idea de separar las configuraciones fuera del código fuente, evitamos  exponer información sensible. Sólo en este caso especial incluimos en el repositorio publico el archivo .env a fines de mostrar cómo se hizo. Si embargo, la buena práctica es poner el archivo .env en .gitignore cosa de que git no lo suba al repositorio y las credenciales permanecen privadas Por otro lado, Firebase nos desafió a mantener la estructura de los datos clara y sin redundancias, aprovechando su flexibilidad sin caer en desorden.
 
 El desarrollo del proyecto presentó algunos desafíos interesantes, como la configuración simultánea de dos bases de datos distintas y la sincronización de sus respuestas en la interfaz. Por ejemplo, mientras MySQL requería definiciones explícitas de relaciones y tipos de datos, Firebase permitía manejar datos con mayor flexibilidad, pero demandaba validaciones adicionales para asegurar consistencia.
 
