@@ -7,7 +7,7 @@ Cátedra: Hernán Merlino
 2. Lopez Francisco: [GitHub](https://github.com/franciscoL0pez)
 3. Corn Franco [GitHub](https://github.com/FrancoCorn)
 4. Alejo Parra Franco: [GitHub](https://github.com/francoalejo21)
-5. integerantes: [GitHub](https://github.com)
+5. Mario Rafael Janampa Salazar: [GitHub](https://github.com/Dayrustz7u7)
 6. integerantes: [GitHub](https://github.com)
 
 ## Objetivo del proyecto:
