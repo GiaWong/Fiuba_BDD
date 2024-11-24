@@ -8,7 +8,7 @@ En el backend, empleamos Node.js, aprovechando su soporte nativo para asincronis
 
 Durante el desarrollo, implementamos operaciones CRUD en ambas bases. Para MySQL, utilizamos consultas tradicionales (`INSERT`, `SELECT`, `UPDATE` y `DELETE`), mientras que en Firebase empleamos métodos como `add`, `get`, `update` y `delete`. Esto nos permitió identificar diferencias clave: mientras que MySQL requiere una estructura rígida y esquemas bien definidos, Firebase ofrece mayor flexibilidad, lo que facilita adaptarse a cambios en la estructura de datos. Sin embargo, esta flexibilidad puede derivar en redundancias si no se diseña adecuadamente.
 ### **Diagrama de arquitectura **
-![Interfaz de usuario](./DiagramaDeArquitectura.png)
+![Diagrama de arquitectura](./DiagramaDeArquitectura.jpeg)
 
 
 
