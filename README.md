@@ -6,7 +6,7 @@ Cátedra: Hernán Merlino
 1. Angie Isabella Valdivia Wong: [GitHub](https://github.com/GiaWong)
 2. Lopez Francisco: [GitHub](https://github.com/franciscoL0pez)
 3. Corn Franco [GitHub](https://github.com/FrancoCorn)
-4. integerantes: [GitHub](https://github.com)
+4. Alejo Parra Franco: [GitHub](https://github.com/francoalejo21)
 5. integerantes: [GitHub](https://github.com)
 6. integerantes: [GitHub](https://github.com)
 
