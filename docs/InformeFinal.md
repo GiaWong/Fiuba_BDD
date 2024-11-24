@@ -7,6 +7,11 @@ Desde el inicio, optamos por React como la base para el desarrollo del frontend.
 En el backend, empleamos Node.js, aprovechando su soporte nativo para asincronismo y la flexibilidad de su ecosistema de librerías. Creamos una API REST que gestionó la lógica de negocio y las conexiones a las bases de datos. Para la base de datos relacional, utilizamos MySQL, aprovechando un servidor remoto gratuito de FreeSQLDataBase. Aunque el espacio estaba limitado a 5 MB, fue suficiente para cubrir las necesidades del trabajo. Por otro lado, Firebase fue la elección para la base de datos NoSQL. Esta plataforma no solo simplificó la configuración, sino que también nos permitió manejar datos menos estructurados con facilidad.
 
 Durante el desarrollo, implementamos operaciones CRUD en ambas bases. Para MySQL, utilizamos consultas tradicionales (`INSERT`, `SELECT`, `UPDATE` y `DELETE`), mientras que en Firebase empleamos métodos como `add`, `get`, `update` y `delete`. Esto nos permitió identificar diferencias clave: mientras que MySQL requiere una estructura rígida y esquemas bien definidos, Firebase ofrece mayor flexibilidad, lo que facilita adaptarse a cambios en la estructura de datos. Sin embargo, esta flexibilidad puede derivar en redundancias si no se diseña adecuadamente.
+### **Diagrama de arquitectura **
+![Interfaz de usuario](./DiagramaDeArquitectura.png)
+
+
+
 
 ### **Interfaz de Usuario y Experiencia**
 
